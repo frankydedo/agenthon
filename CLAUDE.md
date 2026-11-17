@@ -96,10 +96,10 @@ Regole:
 5. Pitch: problema in € o in ore → demo → come funziona → risultati → impatto per i clienti
    dello sponsor.
 
-## 9. Base di conoscenza (`knowledge/`)
+## 9. Base di conoscenza (`Vault/`)
 
-- È una LLM Wiki: le fonti originali stanno in `knowledge/raw/` (immutabili), la sintesi
-  scritta dall'agente in `knowledge/wiki/`. Le regole sono in `knowledge/CLAUDE.md`.
+- È una LLM Wiki: le fonti originali stanno in `Vault/raw/` (immutabili), la sintesi
+  scritta dall'agente in `Vault/wiki/`. Le regole sono in `Vault/CLAUDE.md`.
 - Al kick-off si mettono in `raw/` brief, regolamento, slide e dati, e si fa l'ingest.
-- Prima di decisioni di prodotto o tecniche, leggi `knowledge/wiki/index.md` e le pagine
-  rilevanti. Le decisioni del team sono registrate in `knowledge/wiki/log.md`.
+- Prima di decisioni di prodotto o tecniche, leggi `Vault/wiki/index.md` e le pagine
+  rilevanti. Le decisioni del team sono registrate in `Vault/wiki/log.md`.
