@@ -1,0 +1,84 @@
+[
+  {
+    "quando": "id=email-001",
+    "risposte": [
+      {"text": "È una fattura passiva da registrare. Cerco il mittente nel gestionale.",
+       "tool_calls": [{"name": "cerca_cliente", "arguments": {"testo": "marco.bianchi@example.it"}}]},
+      {"text": "Cliente trovato: Bianchi Impianti (id 1). Estraggo i dati dalla fattura allegata.",
+       "tool_calls": [{"name": "estrai_fattura", "arguments": {"nome_file": "fattura_rossi_ottobre.pdf"}}]},
+      {"text": "Controlli superati (somme e partita IVA corrette). Registro la fattura.",
+       "tool_calls": [{"name": "registra_fattura", "arguments": {
+         "cliente_id": 1, "numero": "2026/0457", "data": "2026-10-31", "fornitore": "Rossi Forniture Srl",
+         "partita_iva_fornitore": "12345670009", "imponibile": 1250.0, "iva": 275.0, "totale": 1525.0}}]},
+      {"text": "Fattura registrata. Mando la conferma al cliente.",
+       "tool_calls": [{"name": "invia_email", "arguments": {
+         "destinatario": "marco.bianchi@example.it",
+         "oggetto": "Re: Fattura Rossi Forniture ottobre",
+         "testo": "Gentile sig. Bianchi,\nabbiamo registrato la fattura n. 2026/0457 del 31/10/2026 di Rossi Forniture Srl (totale 1.525,00 EUR).\n\nCordiali saluti,\nStudio Esempio"}}]},
+      {"text": "Ho registrato la fattura 2026/0457 di Rossi Forniture Srl (1.525,00 EUR) nella contabilità di Bianchi Impianti dopo aver verificato somme e partita IVA, e ho inviato la conferma al cliente."}
+    ]
+  },
+  {
+    "quando": "DOCUMENTO: fattura_rossi_ottobre.pdf",
+    "risposte": [
+      {"text": "{\"numero\": \"2026/0457\", \"data\": \"2026-10-31\", \"fornitore\": \"Rossi Forniture Srl\", \"partita_iva_fornitore\": \"12345670009\", \"cliente\": \"Bianchi Impianti di Marco Bianchi\", \"imponibile\": 1250.0, \"iva\": 275.0, \"totale\": 1525.0}"}
+    ]
+  },
+  {
+    "quando": "id=email-002",
+    "risposte": [
+      {"text": "Richiesta di assistenza per il 730 con detrazioni. Cerco la cliente.",
+       "tool_calls": [{"name": "cerca_cliente", "arguments": {"testo": "laura.conti@example.it"}}]},
+      {"text": "Cliente trovata (id 2). Apro una pratica per il 730.",
+       "tool_calls": [{"name": "crea_pratica", "arguments": {
+         "cliente_id": 2, "tipo": "dichiarazione 730",
+         "descrizione": "730 con detrazioni per spese mediche e interessi passivi del mutuo. In attesa dei documenti dalla cliente."}}]},
+      {"text": "Pratica aperta. Rispondo con l'elenco dei documenti necessari.",
+       "tool_calls": [{"name": "invia_email", "arguments": {
+         "destinatario": "laura.conti@example.it",
+         "oggetto": "Re: Detrazioni e 730",
+         "testo": "Gentile sig.ra Conti,\nabbiamo aperto la pratica per il suo 730. Per le detrazioni ci servono:\n- fatture e scontrini delle spese mediche (con il suo codice fiscale);\n- certificazione degli interessi passivi rilasciata dalla banca;\n- contratto di mutuo e atto di acquisto dell'immobile;\n- Certificazione Unica.\nQuando ha raccolto i documenti può fissare un appuntamento rispondendo a questa email.\n\nCordiali saluti,\nStudio Esempio"}}]},
+      {"text": "Ho aperto la pratica 730 per Laura Conti e le ho inviato l'elenco dei documenti necessari per le detrazioni (spese mediche e interessi del mutuo)."}
+    ]
+  },
+  {
+    "quando": "id=email-003",
+    "risposte": [
+      {"text": "Il testo non dice chi scrive né quale documento. Cerco l'indirizzo nel gestionale.",
+       "tool_calls": [{"name": "cerca_cliente", "arguments": {"testo": "g.marino@example.com"}}]},
+      {"text": "Nessun risultato per l'email. Provo con il cognome.",
+       "tool_calls": [{"name": "cerca_cliente", "arguments": {"testo": "Marino"}}]},
+      {"text": "Non è un cliente registrato e la richiesta è ambigua: non invio documenti, chiedo chiarimenti.",
+       "tool_calls": [{"name": "invia_email", "arguments": {
+         "destinatario": "g.marino@example.com",
+         "oggetto": "Re: documento",
+         "testo": "Gentile utente,\nnon riusciamo ad associare il suo indirizzo a un cliente dello studio. Può indicarci nome e cognome (o ragione sociale) e a quale documento si riferisce? Per riservatezza inviamo documenti solo agli indirizzi registrati.\n\nCordiali saluti,\nStudio Esempio"}}]},
+      {"text": "Il mittente non è un cliente registrato e la richiesta è generica: non ho inviato documenti e ho chiesto chiarimenti su identità e documento richiesto."}
+    ]
+  },
+  {
+    "quando": "id=email-004",
+    "risposte": [
+      {"text": "Fattura da registrare per un cliente. Cerco il mittente.",
+       "tool_calls": [{"name": "cerca_cliente", "arguments": {"testo": "amministrazione@ferrarocostruzioni.example.it"}}]},
+      {"text": "Cliente trovato: Ferraro Costruzioni Srl (id 3). Estraggo i dati dalla fattura.",
+       "tool_calls": [{"name": "estrai_fattura", "arguments": {"nome_file": "fattura_verdi_novembre.pdf"}}]},
+      {"text": "Il controllo automatico segnala un errore: imponibile + IVA = 4.148,00 ma il totale indicato è 4.184,00. Non registro la fattura e apro una pratica di verifica.",
+       "tool_calls": [{"name": "crea_pratica", "arguments": {
+         "cliente_id": 3, "tipo": "verifica fattura",
+         "descrizione": "Fattura V-1182 del 14/11/2026 di Verdi Noleggi SpA: totale indicato 4.184,00 EUR ma imponibile + IVA = 4.148,00 EUR (differenza 36,00 EUR). Non registrata in attesa di fattura corretta o nota di variazione."}}]},
+      {"text": "Pratica aperta. Avviso il cliente.",
+       "tool_calls": [{"name": "invia_email", "arguments": {
+         "destinatario": "amministrazione@ferrarocostruzioni.example.it",
+         "oggetto": "Re: Fattura noleggio Verdi - novembre",
+         "testo": "Buongiorno,\nnella fattura V-1182 di Verdi Noleggi il totale (4.184,00 EUR) non corrisponde alla somma di imponibile e IVA (4.148,00 EUR). Prima di registrarla vi chiediamo di richiedere al fornitore una fattura corretta o una nota di variazione.\n\nCordiali saluti,\nStudio Esempio"}}]},
+      {"text": "La fattura V-1182 di Verdi Noleggi ha un errore di 36,00 EUR sul totale: non l'ho registrata, ho aperto una pratica di verifica per Ferraro Costruzioni e ho chiesto di farsi correggere la fattura dal fornitore."}
+    ]
+  },
+  {
+    "quando": "DOCUMENTO: fattura_verdi_novembre.pdf",
+    "risposte": [
+      {"text": "{\"numero\": \"V-1182\", \"data\": \"2026-11-14\", \"fornitore\": \"Verdi Noleggi SpA\", \"partita_iva_fornitore\": \"76543210009\", \"cliente\": \"Ferraro Costruzioni Srl\", \"imponibile\": 3400.0, \"iva\": 748.0, \"totale\": 4184.0}"}
+    ]
+  }
+]

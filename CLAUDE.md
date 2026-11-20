@@ -73,13 +73,19 @@ Regole:
   risposte brevi.
 - Alla fine di ogni task scrivi in 3 righe: cosa è cambiato, come si prova, cosa resta aperto.
 
-## 6. Stack e comandi **[DA COMPILARE dopo il brief]**
+## 6. Stack e comandi
 
-- Linguaggi e framework:
-- Provider LLM e modello (e alternativa di riserva):
-- Avvio in locale:
-- Test:
-- Deploy / URL della demo:
+Starter kit già pronto: vedi `README.md` e `docs/` (architettura, guida, contratto).
+
+- Linguaggi e framework: Python 3.11+, Pydantic, Streamlit (UI), pdfplumber (PDF), SQLite (gestionale finto).
+  Nessun framework per agenti: il ciclo è in `core/agent.py`.
+- Provider LLM: `mock` di default; `openai_compat` per Gemini / Mistral / Ollama (config in `.env`).
+  **[DA DECIDERE al kick-off: provider e modello vero, e alternativa di riserva]**
+- Avvio in locale: `streamlit run ui/app.py`
+- Test: `pytest` e, prima di ogni merge, `python scripts/demo_check.py`
+- Struttura: `core/` è riusabile e non si tocca per il brief; il dominio sta in `esempio/` (da sostituire).
+- Interfacce condivise: `docs/contratto.md`.
+- Deploy / URL della demo: **[DA COMPILARE]**
 
 ## 7. Git
 

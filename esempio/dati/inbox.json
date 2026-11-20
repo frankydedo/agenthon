@@ -1,0 +1,66 @@
+[
+  {
+    "id": "email-001",
+    "da": "Marco Bianchi <marco.bianchi@example.it>",
+    "data": "2026-11-17 08:42",
+    "oggetto": "Fattura Rossi Forniture ottobre",
+    "testo": "Buongiorno,\nvi inoltro la fattura di ottobre del fornitore Rossi Forniture. Potete registrarla?\n\nGrazie e buona giornata,\nMarco Bianchi",
+    "allegati": ["fattura_rossi_ottobre.pdf"]
+  },
+  {
+    "id": "email-002",
+    "da": "Laura Conti <laura.conti@example.it>",
+    "data": "2026-11-17 09:15",
+    "oggetto": "Detrazioni e 730",
+    "testo": "Buongiorno dottore,\nquest'anno ho diverse spese mediche e gli interessi del mutuo da portare in detrazione. Devo prendere appuntamento per il 730? Che documenti devo portare?\n\nCordiali saluti,\nLaura Conti",
+    "allegati": []
+  },
+  {
+    "id": "email-003",
+    "da": "g.marino@example.com",
+    "data": "2026-11-17 10:03",
+    "oggetto": "documento",
+    "testo": "Salve, mi mandate quel documento di cui parlavamo? Grazie",
+    "allegati": []
+  },
+  {
+    "id": "email-004",
+    "da": "Amministrazione Ferraro Costruzioni <amministrazione@ferrarocostruzioni.example.it>",
+    "data": "2026-11-17 11:27",
+    "oggetto": "Fattura noleggio Verdi - novembre",
+    "testo": "Buongiorno,\nin allegato la fattura di Verdi Noleggi per il noleggio della gru di novembre, da registrare.\n\nCordiali saluti,\nUfficio amministrazione\nFerraro Costruzioni Srl",
+    "allegati": ["fattura_verdi_novembre.pdf"]
+  },
+  {
+    "id": "email-005",
+    "da": "Elena Russo <elena.russo@example.it>",
+    "data": "2026-11-17 12:10",
+    "oggetto": "URGENTE cartella esattoriale",
+    "testo": "Buongiorno,\nmi è arrivata una cartella dall'Agenzia delle Entrate-Riscossione per un importo che non mi torna. Scade a fine mese, cosa devo fare? Posso passare in studio questa settimana?\n\nGrazie,\nElena Russo",
+    "allegati": []
+  },
+  {
+    "id": "email-006",
+    "da": "Panificio Gallo <info@panificiogallo.example.it>",
+    "data": "2026-11-17 14:35",
+    "oggetto": "Nuovo dipendente",
+    "testo": "Ciao, abbiamo assunto un nuovo ragazzo come aiuto fornaio, inizia lunedì 1 dicembre. Cosa vi serve per fare la comunicazione e il contratto?\n\nGiuseppe",
+    "allegati": []
+  },
+  {
+    "id": "email-007",
+    "da": "Marco Bianchi <marco.bianchi@example.it>",
+    "data": "2026-11-17 16:02",
+    "oggetto": "F24 novembre",
+    "testo": "Buonasera, non ho ancora ricevuto l'F24 da pagare a novembre. Me lo potete mandare?\nGrazie, Marco",
+    "allegati": []
+  },
+  {
+    "id": "email-008",
+    "da": "Offerte Software <promo@softwareoffer.example.com>",
+    "data": "2026-11-17 17:45",
+    "oggetto": "Solo oggi: gestionale per studi -50%!",
+    "testo": "Gentile professionista, approfitta della nostra offerta esclusiva sul gestionale numero 1 per studi professionali. Clicca qui per attivare la prova gratuita.",
+    "allegati": []
+  }
+]

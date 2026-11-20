@@ -2,3 +2,13 @@
 .obsidian/workspace*.json
 .env
 .env.*
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Stato generato a runtime (run, tracce, database della demo, email "inviate")
+runs/

@@ -1,0 +1,7 @@
+pydantic>=2.7          # validazione di argomenti dei tool e output strutturati
+httpx>=0.27            # chiamate HTTP al provider LLM
+python-dotenv>=1.0     # legge le impostazioni dal file .env
+pdfplumber>=0.11       # estrazione del testo dai PDF
+streamlit>=1.40        # interfaccia della demo
+fpdf2>=2.7             # solo per rigenerare i PDF di esempio
+pytest>=8              # test
