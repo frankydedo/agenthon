@@ -11,3 +11,11 @@
 - `core/` è considerato riusabile; `esempio/` è solo uno scenario di prova da sostituire dopo il brief.
 - Divisione dei file in `docs/contratto.md`: è una proposta, da confermare al kick-off.
 - Aperto: provider e modello veri, alternativa di riserva, prova con un modello vero.
+
+## [2026-11-20 12:52] decisione | LLM locale per lo sviluppo
+- Modello `qwen/qwen3-30b-a3b-2507` su LM Studio nel MacBook Air (24 GB), usato come server;
+  si lavora dal MacBook Pro (16 GB) via Wi-Fi con `LLM_PROVIDER=openai_compat`.
+- Verificati: `/v1/models`, tool calling tramite `core/llm_openai.py`, streaming SSE con curl.
+- Cavo Thunderbolt Bridge scartato (cavo non adatto); riserva: hotspot del telefono, poi `mock`.
+- Creata `analyses/llm-locale.md`; aggiornati `index.md` e `overview.md`.
+- Aperto: provider cloud di riserva, prova del flusso completo nella UI.

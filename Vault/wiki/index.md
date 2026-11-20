@@ -11,4 +11,4 @@
 _(nessuna pagina ancora)_
 
 ## Analisi
-_(nessuna pagina ancora)_
+- [LLM locale](analyses/llm-locale.md): Qwen3-30B-A3B su LM Studio nell'Air, collegato dal Pro via Wi-Fi; config, prove, piani di riserva.

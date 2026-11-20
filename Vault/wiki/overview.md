@@ -21,9 +21,12 @@ tags: [stato]
   - `esempio/`: scenario di prova (studio commercialista, email e fatture). **Da sostituire**
     dopo il brief, non è il caso d'uso scelto.
 - Verificato il 2026-11-20: test verdi e `scripts/demo_check.py` ok, ma solo con il provider
-  finto (mock). Mai provato con un modello vero.
+  finto (mock).
+- Modello vero in sviluppo: Qwen3-30B-A3B su LM Studio nel MacBook Air, collegato dal Pro via
+  Wi-Fi; tool calling verificato il 2026-11-20, flusso completo nella UI non ancora provato.
+  Vedi [LLM locale](analyses/llm-locale.md).
 
 ## Domande aperte
-- Provider e modello veri, e alternativa di riserva.
+- Provider cloud di riserva per la demo dal vivo (il modello locale è deciso, vedi sopra).
 - Come misurare la metrica del pitch (accuratezza dello smistamento, tempo risparmiato...).
 - Tutto ciò che è in "Da verificare" nelle pagine delle entità.
