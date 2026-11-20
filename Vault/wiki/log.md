@@ -19,3 +19,9 @@
 - Cavo Thunderbolt Bridge scartato (cavo non adatto); riserva: hotspot del telefono, poi `mock`.
 - Creata `analyses/llm-locale.md`; aggiornati `index.md` e `overview.md`.
 - Aperto: provider cloud di riserva, prova del flusso completo nella UI.
+
+## [2026-11-20 13:00] decisione | Impostazioni di LM Studio per Qwen3-30B-A3B
+- Context 16k (non 262k: limite di memoria dell'Air), GPU offload massimo, flash attention,
+  auto-unload disattivato, nessun system prompt nel preset, temperature 0.3.
+- Il token di LM Studio resta fuori dalla wiki (regola di `CLAUDE.md` §5 sui segreti).
+- Aggiornata `analyses/llm-locale.md`.

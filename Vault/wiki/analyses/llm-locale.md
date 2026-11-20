@@ -16,8 +16,7 @@ Tutto ciò che è scritto qui è stato provato in sessione il 2026-11-20 e non v
 ## Configurazione
 - **Server (Air 24 GB)**: LM Studio, modello `qwen/qwen3-30b-a3b-2507` (MoE, circa 3B parametri
   attivi), circa 50-60 token/s in locale. Nella scheda Developer: server avviato, **Serve on
-  Local Network** attivo, autenticazione con token attiva. Context length consigliato di almeno 16k
-  *(deduzione: il default di 4k è stretto per un agente con i tool)*.
+  Local Network** attivo, autenticazione con token attiva, context length **16k** (dettagli sotto).
 - **Air sempre sveglio**: alimentatore collegato, coperchio aperto, `caffeinate -dimsu` in un terminale.
 - **Client (Pro 16 GB)**: nel file `.env`, che non va mai committato:
   ```
@@ -27,7 +26,26 @@ Tutto ciò che è scritto qui è stato provato in sessione il 2026-11-20 e non v
   LLM_API_KEY=<token generato in LM Studio sull'Air>
   ```
   L'IP si legge sull'Air con `ipconfig getifaddr en0` e **cambia a ogni rete**: il 2026-11-20 a
-  casa era `192.168.1.12`. Il token non si scrive mai nella wiki né nel repo.
+  casa era `192.168.1.12`. Il token non si scrive mai nella wiki né nel repo (regola di
+  `CLAUDE.md` §5): si chiede a chi gestisce l'Air e si condivide in privato.
+
+## Impostazioni di LM Studio (Air)
+Decise il 2026-11-20.
+- **Context length: 16384.** Il modello arriva fino a 262k, ma la KV cache costa circa 96 KB
+  per token in fp16 *(deduzione dall'architettura: 48 layer, 4 KV head, head dim 128)*, cioè
+  circa 1,5 GB a 16k e circa 24 GB a 262k. Il modello in 4-bit occupa già circa 17 GB dei 24.
+  Il massimo realistico è 32k, e solo con la KV cache quantizzata a 8 bit.
+- **GPU offload**: massimo, tutti i layer.
+- **Flash attention**: attiva, se disponibile.
+- **Scaricamento automatico** (JIT / auto-unload / TTL) **disattivato**, così il modello resta
+  caricato e la prima richiesta della demo non aspetta il caricamento.
+- **Nessun system prompt nel preset**: il system prompt è nel codice (`esempio/agente.py`) e va
+  con qualunque provider.
+- **Campionamento**: temperature 0.3, top_p 0.8, top_k 20, min_p 0. Qwen raccomanda temperature
+  0.7 per la chat; per tool e JSON si sceglie più bassa *(deduzione)*. Il provider del progetto
+  oggi non manda `temperature`, quindi vale quella del preset. Passarla dal `.env` richiede di
+  modificare `core/`, da concordare col team.
+- Dopo il caricamento: in Monitoraggio Attività la "Pressione memoria" deve restare verde.
 
 ## Cosa è stato verificato
 - `GET /v1/models` dal Pro risponde e mostra il modello (oltre a `text-embedding-nomic-embed-text-v1.5`).
