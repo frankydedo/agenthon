@@ -25,3 +25,11 @@
   auto-unload disattivato, nessun system prompt nel preset, temperature 0.3.
 - Il token di LM Studio resta fuori dalla wiki (regola di `CLAUDE.md` §5 sui segreti).
 - Aggiornata `analyses/llm-locale.md`.
+
+## [2026-11-21 10:08] ingest | Regolamento ufficiale
+- Fonte: `raw/regulation.pdf` (versione del 20/11/2026); aggiunta la trascrizione `raw/regulation.md`.
+- Creata: `concepts/consegna-e-valutazione.md`. Aggiornate: `entities/agenthon.md`, `overview.md`, `index.md`.
+- Nuovi fatti: pesi dei criteri, consegna via portale (repo + README + 1.000 caratteri), ultimo
+  commit registrato alla scadenza, finalisti scelti senza pitch, pitch di ~3 minuti, premi 1.250/500 €.
+- Nessuna contraddizione con la pagina Luma; risolti diversi punti "Da verificare".
+- Aperto: starter kit preesistente (art. 7.1/7.3), orario di consegna, branch letto dal portale.
