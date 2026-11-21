@@ -29,7 +29,7 @@
 - Prodotti annunciati: AI Advisory (assistente conversazionale per advisor), Stock Selector,
   Alt-Asset Pricer, Real Estate AI, Company Brain (base di conoscenza unica dell'azienda).
 
-> **Decisioni di prodotto e piano di lavoro: leggi `endof.md` nella root prima di scrivere codice.**
+> **Decisioni di prodotto e piano di lavoro: leggi `solution.md` nella root prima di scrivere codice.**
 
 ## 2. Il brief (uscito alle 10:28 del 21/11; testo in `Vault/raw/2026-11-21-brief-track1.md`)
 
@@ -55,7 +55,8 @@ sa e non agisce mai senza l'approvazione di una persona**, non quella più appar
 - **Pitch**: circa 3 minuti con demo dal vivo, davanti alla giuria, che può fare domande. Il team
   può essere "attaccato" da giuria e squadre rivali: **la demo deve reggere a domande fuori copione**.
 - **Premio extra**: "Best use of ElevenLabs" (facoltativo, solo se ha senso nel prodotto).
-- **Ancora da chiarire**: orario di consegna; strumenti e crediti dei partner; metrica per il pitch
+- **Consegna: ore 17:00** (ultimo commit entro le 16:50).
+- **Ancora da chiarire**: strumenti e crediti dei partner; metrica per il pitch
   (proposta: i 7 controlli superati, più numeri su pertinenza e "non lo so" corretti).
 
 ## 3. Team e responsabilità **[ruoli decisi; cartelle da confermare dopo il brief]**

@@ -50,32 +50,37 @@
 - Il «perché» viene dal testo del modello: `SYSTEM_PROMPT` ora chiede una frase prima di ogni
   strumento. Nuove rotte: `GET /api/agente`, `GET /api/richieste/{id}/allegati`.
 
-## [2026-11-21 12:40] ingest | Brief ufficiale della Track 1
+## [2026-11-21 12:10] ingest | Brief ufficiale della Track 1
 - Fonte: `raw/2026-11-21-brief-track1.md` (rivelato alle 10:28). Due sfide: A Company Brain, B Back Office Autopilot.
 - Sette controlli sì/no per la sfida A, difesa dal vivo contro giuria e squadre rivali.
 
-## [2026-11-21 12:40] decisione | Sviluppiamo la Challenge A · Company Brain
+## [2026-11-21 12:10] decisione | Sviluppiamo la Challenge A · Company Brain
 - Scelta del team: **A**. Aggiornato CLAUDE.md §2.
 - Conseguenza: lo starter kit (`core/`, `api/`, `web/`) resta valido per ciclo agente, approvazioni, traccia
   e provider; `esempio/` (studio commercialista, fatture) **non** è il dominio giusto e va sostituito.
   Mancano da costruire: memoria condivisa curata, permessi per ruolo, citazioni, "non lo so", brief proattivi.
 - Aperto: dati sintetici (che azienda, che fonti), dove incontra il team (chat / email del mattino), ruolo di ElevenLabs.
 
-## [2026-11-21 13:10] decisione | Prodotto: Company Brain sulle riunioni di progetto
+## [2026-11-21 12:20] decisione | Prodotto: Company Brain sulle riunioni di progetto
 - Il Brain legge riunioni (minute, trascrizioni, audio), estrae task e assegnatari, segnala punti
   oscuri, persone/contesti sconosciuti e incongruenze tra riunioni; aggiorna la to-do di progetto
   come proposta; il manager approva e solo dopo si smista; to-do giornaliere personali.
 - Voce con ElevenLabs come bonus; interfaccia a widget come app unica (non microfrontend veri).
-- Riepilogo completo per gli agenti del team in `endof.md` (root). Piano e contratti: proposti.
+- Riepilogo completo per gli agenti del team in `endof.md` (root, poi rinominato `solution.md`). Piano e contratti: proposti.
 
-## [2026-11-21 13:25] decisione | Decisioni comuni dopo il brief
+## [2026-11-21 12:25] decisione | Decisioni comuni dopo il brief
 - Si continua su questa repo (`develop`), non se ne crea una nuova.
 - PMI di automazione industriale (~8 persone); voce ElevenLabs in P1; demo con modello locale e cloud di riserva.
 - Divisione: Franky AI, Pietro backend/dati/to-do/voce, Mauro interfaccia/docs/pitch.
 - Permessi **per competenza** (aree; competenze per persona, es. senior dev anche `budget`); il modello
   propone l'area, il manager la conferma, il codice filtra.
 - To-do del giorno: decide la persona; modifiche alla lista di progetto: proposta al manager.
-- Widget: layout fisso, componibile in P2. Dettagli in `endof.md` §0.
+- Widget: layout fisso, componibile in P2. Dettagli in `solution.md` §0.
 - Aggiunto: aree `sviluppo, budget, commerciale, fornitori, personale, generale`; per vedere un'informazione
-  servono **tutte** le sue aree; **5 riunioni** sintetiche.
+  basta **una** delle sue aree (corretto alle 12:30); **5 riunioni** sintetiche.
+
+## [2026-11-21 12:30] decisione | Consegna alle 17:00, permessi in OR
+- Orario di consegna: **17:00** (ultimo commit entro le 16:50). Tappe ricalcolate in `solution.md` §8.
+- Permessi: basta **una** delle aree dell'informazione per vederla.
+- `endof.md` rinominato in `solution.md` dal team.
 

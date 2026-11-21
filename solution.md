@@ -1,4 +1,4 @@
-# endof.md: allineamento per gli agenti del team
+# solution.md: allineamento per gli agenti del team
 
 > **Leggi questo file prima di scrivere codice.** Riassume le decisioni prese dal team il
 > 21/11/2026 durante AGENTHON (Track 1, Agentic AI for business). Le regole generali di lavoro
@@ -16,6 +16,7 @@
 
 | Tema | Decisione |
 |---|---|
+| Consegna | **[DECISO]** **ore 17:00**; ultimo commit entro le 16:50 |
 | Repo | **[DECISO]** si continua su **questa repo**, branch `develop` (non se ne crea una nuova) |
 | PMI fittizia | **[DECISO]** azienda di **automazione industriale**, circa 8 persone |
 | Voce (ElevenLabs) | **[DECISO]** **P1**: dopo che i 7 controlli passano con minute di testo |
@@ -120,9 +121,10 @@ informazioni sullo sviluppo ma non il budget; un senior, se è di sua competenza
   `personale`, `generale`. `generale` è visibile a tutti i membri del progetto.
 - Ogni **persona** ha un insieme di competenze: quelle tipiche del suo ruolo **più eventuali
   aggiunte personali** (es. senior dev = `sviluppo` + `budget`). Il manager del progetto le ha tutte.
-- Ogni **fatto, task o voce di memoria** ha una o più aree. [DECISO] Una persona lo vede solo se ha
-  **tutte** quelle aree (es. «il ritardo del fornitore costa 8.000 €» = `fornitori` + `budget`: lo vede
-  solo chi ha entrambe). Altrimenti la risposta è «non hai accesso a questa informazione».
+- Ogni **fatto, task o voce di memoria** ha una o più aree. [DECISO] Una persona lo vede se ha
+  **almeno una** di quelle aree. Quindi chi è nell'area X vede le informazioni di X, chi è nell'area Y
+  quelle di Y, chi appartiene a entrambe vede entrambe. Se non ha nessuna delle aree, la risposta è
+  «non hai accesso a questa informazione» (e non si rivela il contenuto).
 - **Chi assegna l'area**: il modello la **propone** in fase di estrazione, **il manager la conferma**
   quando approva la proposta (è parte della curatela). In caso di dubbio il default è l'area **più
   restrittiva** (mai `generale`). Il **filtro** sulle aree lo applica sempre il **codice**, prima di
@@ -233,15 +235,16 @@ un evento esterno (es. errore nel codice) che rimescola le priorità.
 - **P2**: ascolto dal vivo; eventi esterni (errori nel codice); ricadute a catena delle
   dipendenze; widget trascinabili.
 
-| Ora (consegna ipotizzata 19:00) | Tappa |
+| Ora (**consegna alle 17:00**, confermata) | Tappa |
 |---|---|
-| +45 min | Fase 0 chiusa: contratti e repo pronti |
-| **15:30** | **M1**: tutto collegato con dati finti (minuta → proposte → approvazione → to-do) |
-| **17:00** | **M2**: P0 completo con il modello vero, i 7 controlli passano |
-| 18:15 | M3: voce e to-do del giorno |
-| 18:15-19:00 | **blocco funzionalità**: solo bug, prova del pitch, video di riserva, merge su `main` |
+| 12:30-13:00 | **Fase 0**: contratti (`modelli.py`, schema, formato riunione), dati finti della riunione 1, accessi |
+| **14:15** | **M1**: tutto collegato con dati finti (minuta → proposte → approvazione → to-do personali) |
+| **15:30** | **M2**: P0 completo con il modello vero, i 7 controlli passano (`demo_check.py`) |
+| 15:30-16:15 | solo se M2 è chiuso: P1 (audio ElevenLabs, brief vocale, to-do del giorno) |
+| **16:15-16:50** | **blocco funzionalità**: solo bug, prova del pitch, video di riserva, README, descrizione, merge su `main` |
+| **16:50** | **ultimo commit**. Alle 17:00 il portale registra l'ultimo commit: dopo, niente modifiche |
 
-Se M2 non è chiuso alle 17:00, **la voce si salta**.
+Se M2 non è chiuso alle 15:30, **la voce si salta** e si lavora solo sui 7 controlli.
 
 ---
 
@@ -263,7 +266,6 @@ Se M2 non è chiuso alle 17:00, **la voce si salta**.
 
 ## 10. Aperto
 
-- **[APERTO]** Orario di consegna (verrà comunicato all'evento).
 - **[APERTO]** Accesso della giuria alla repo da un altro account (repo pubblica o giuria invitata), da sistemare prima della consegna.
 - **[APERTO]** Competenze di ogni persona dell'azienda fittizia (Fase 0, con i dati di `azienda.json`).
 - **[APERTO]** Quale modello cloud di riserva; crediti e API disponibili per ElevenLabs.
