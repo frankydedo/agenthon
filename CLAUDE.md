@@ -35,7 +35,11 @@
 - Caso d'uso scelto dal team (uno solo):
 - Metrica di successo da mostrare nel pitch (tempo risparmiato, accuratezza, € ...):
 
-## 3. Team e responsabilità **[DA COMPILARE con nomi e cartelle]**
+## 3. Team e responsabilità **[ruoli decisi; cartelle da confermare dopo il brief]**
+
+- **Mauro** e **Pietro**: software (integrazioni, backend, interfaccia). **Franky**: studia l'AI
+  (agente, prompt, valutazione). Nella pratica tutti fanno un po' di tutto: i ruoli sotto
+  indicano chi decide, non chi è l'unico a toccare quei file.
 
 | Ruolo | Cosa possiede |
 |---|---|
@@ -89,8 +93,9 @@ Starter kit già pronto: vedi `README.md` e `docs/` (architettura, guida, contra
 
 ## 7. Git
 
-- Un solo repo condiviso. Branch brevi `<nome>/<cosa>`, merge su `main` frequenti e piccoli.
-- Prima del merge: i test passano e la demo parte.
+- Un solo repo condiviso. **Si lavora tutti su `develop`** (`git pull` prima, commit piccoli).
+- Su `main` si porta **solo ciò che è testato e funziona**: `pytest` e `python scripts/demo_check.py`
+  passano e la demo parte.
 - Mai push forzati né riscrittura della history di `main`.
 
 ## 8. Fasi della giornata

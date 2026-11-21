@@ -5,3 +5,4 @@ pdfplumber>=0.11       # estrazione del testo dai PDF
 streamlit>=1.40        # interfaccia della demo
 fpdf2>=2.7             # solo per rigenerare i PDF di esempio
 pytest>=8              # test
+fastapi>=0.115      # backend HTTP dell'interfaccia web (api/)
