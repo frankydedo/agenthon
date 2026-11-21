@@ -6,14 +6,18 @@ virtualenv attivo (`.venv\Scripts\activate` su Windows, `source .venv/bin/activa
 
 ## 1. Avviare e presentare la demo
 
-```
-streamlit run ui/app.py
+```bash
+LLM_PROVIDER=mock uvicorn api.main:app --port 8000      # terminale 1
+cd web && npm run dev                                    # terminale 2 → http://localhost:5173
 ```
 
-1. Barra laterale → **Reset demo** per partire puliti.
-2. Clicca **Elabora** su una email: al centro compaiono i passi dell'agente.
-3. A destra c'è l'azione da approvare: puoi correggere gli argomenti (è JSON), poi **Approva** o **Rifiuta**.
-4. In basso, nelle schede, vedi le pratiche aperte, le fatture registrate e le email "inviate".
+1. **Reset** in alto a destra per partire puliti (la casella è vuota).
+2. **Genera richiesta** (a sinistra) fa arrivare una email di prova; la freccia accanto fa scegliere quale.
+3. **Avvia l'agente**: al centro compaiono i passi, il più recente in alto.
+4. A destra c'è l'azione da approvare, descritta in italiano; i dati tecnici (JSON) stanno dietro un pulsante. **Approva** o **Rifiuta**.
+5. In basso, nelle schede, vedi le pratiche aperte, le fatture registrate e le email "inviate".
+
+(L'interfaccia di ripiego è `streamlit run ui/app.py`.)
 
 Ordine consigliato per la demo: **email-001** (flusso completo) → **email-004** (il controllo trova
 l'errore: è il momento più forte) → **email-003** (l'agente non inventa).
@@ -99,9 +103,12 @@ alta voce" che volete far vedere in demo.
 4. **Connettori** (`connettori.py`): finti all'inizio, con la stessa forma di quelli veri.
 5. **Dati** (`dati/`): richieste, documenti e database realistici per il caso del brief.
 6. **Mock** (`dati/mock/scenari.json`): registrate 2-3 scenari per la demo.
-7. **Import**: in `ui/app.py` e `scripts/demo_check.py` sostituite `esempio` con il nuovo
-   nome, poi aggiornate `ATTESE` in `demo_check.py`.
-8. Aggiornate [contratto.md](contratto.md) e i testi della UI (titolo, etichette).
+7. **Import**: in `api/main.py`, `ui/app.py` e `scripts/demo_check.py` sostituite `esempio` con il
+   nuovo nome, poi aggiornate `ATTESE` in `demo_check.py`.
+8. **Interfaccia web**: in `web/src/azioni.ts` i nomi leggibili dei tool e l'anteprima delle azioni
+   da approvare; in `api/main.py` il testo `SORGENTE_SIMULATA`; i testi in `App.tsx`. Vedi
+   [frontend.md](frontend.md#adattarla-a-un-nuovo-brief).
+9. Aggiornate [contratto.md](contratto.md).
 
 Prima versione end-to-end con il mock, poi il modello vero, poi la misura della metrica.
 

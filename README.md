@@ -29,14 +29,18 @@ Poi, dalla cartella del repo:
 
 | Comando | A cosa serve |
 |---|---|
-| `streamlit run ui/app.py` | apre la demo nel browser (http://localhost:8501) |
+| `uvicorn api.main:app --port 8000` | avvia il backend (con `LLM_PROVIDER=mock` davanti per non usare il modello vero) |
+| `cd web && npm install && npm run dev` | avvia l'interfaccia web: http://localhost:5173 (serve Node 20+) |
+| `streamlit run ui/app.py` | interfaccia di ripiego (http://localhost:8501), non richiede il backend |
 | `python scripts/demo_check.py` | verifica che il flusso completo funzioni: **da lanciare prima di ogni merge** |
 | `pytest` | tutti i test (pochi secondi) |
 
 ## Cosa provare nella demo
 
-Nella UI clicca **Elabora** su una delle prime quattro email, guarda i passi al centro e approva
-o rifiuta le azioni a destra. In basso vedi cosa è cambiato nei sistemi dello studio.
+Nell'interfaccia web la casella parte vuota: premi **Genera richiesta** (a sinistra) per simulare
+l'arrivo di una email di un cliente, poi **Avvia l'agente**, guarda i passi al centro (il più
+recente in alto) e approva o rifiuta le azioni a destra. In basso vedi cosa è cambiato nei
+sistemi dello studio. Dettagli in [docs/frontend.md](docs/frontend.md).
 
 | Email | Cosa mostra |
 |---|---|
@@ -65,7 +69,9 @@ esempio/              scenario di prova: da sostituire con il dominio del brief
   connettori.py       inbox, gestionale (SQLite) e posta in uscita, tutti finti
   documenti.py        estrazione dati dalle fatture PDF + controlli deterministici
   dati/               email, PDF, database iniziale, risposte registrate del mock
-ui/app.py             interfaccia Streamlit della demo
+api/main.py           backend HTTP (FastAPI): solo traduzione tra web e core, più il simulatore della casella
+web/                  interfaccia web React (vedi docs/frontend.md)
+ui/app.py             interfaccia Streamlit di ripiego
 scripts/demo_check.py verifica end-to-end con il mock
 tests/                test automatici
 docs/                 documentazione
@@ -74,8 +80,10 @@ runs/                 stato generato a runtime (ignorato da git)
 
 ## Documentazione
 
-- [docs/panoramica.md](docs/panoramica.md): **inizia da qui**. Cosa c'è, cosa è stato verificato, cosa resta da fare.
-- [docs/architettura.md](docs/architettura.md): cosa c'è, come funziona e perché è fatto così.
+- [docs/architettura.md](docs/architettura.md): **inizia da qui**: livelli, flusso, dove sta lo stato, perché è fatto così.
+- [docs/frontend.md](docs/frontend.md): l'interfaccia web, tutti i casi d'uso, come adattarla.
+- [docs/consegna.md](docs/consegna.md): descrizione per la giuria e checklist di consegna.
+- [docs/panoramica.md](docs/panoramica.md):  Cosa c'è, cosa è stato verificato, cosa resta da fare.
 - [docs/guida.md](docs/guida.md): come si usa, come si aggiunge un tool, come si adatta al brief.
 - [docs/contratto.md](docs/contratto.md): le interfacce condivise tra le parti del team.
 

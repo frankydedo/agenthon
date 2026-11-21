@@ -1,7 +1,7 @@
 import { Background, Controls, MarkerType, ReactFlow, type Edge, type Node } from '@xyflow/react'
 import { useMemo } from 'react'
 import type { Passo } from '@/api'
-import { titolo } from '@/passi'
+import { spiega } from '@/azioni'
 
 const CORSIA: Record<Passo['tipo'], number> = {
   inizio: 1, llm: 0, tool: 1, in_attesa: 2, approvato: 2, rifiutato: 2, modificato: 2, fine: 0, errore: 1,
@@ -16,7 +16,7 @@ export function Grafo({ passi }: { passi: Passo[] }) {
   const { nodes, edges } = useMemo(() => {
     const nodes: Node[] = passi.map((p, i) => ({
       id: String(i), position: { x: i * 230, y: CORSIA[p.tipo] * 130 }, draggable: false,
-      data: { label: titolo(p).slice(0, 70) },
+      data: { label: spiega(p).titolo.slice(0, 70) },
       style: {
         width: 200, fontSize: 12, borderRadius: 12, padding: 10, color: 'var(--text)',
         background: 'var(--surface)', border: `1.5px solid ${COLORE[p.tipo]}`,

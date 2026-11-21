@@ -7,4 +7,6 @@ from core import config
 def runs_temporanei(tmp_path, monkeypatch):
     """Ogni test scrive run, tracce e database in una cartella temporanea, mai in runs/."""
     monkeypatch.setattr(config, "RUNS_DIR", tmp_path / "runs")
+    # I test non chiamano mai il modello vero, qualunque cosa ci sia nel .env.
+    monkeypatch.setattr(config, "LLM_PROVIDER", "mock")
     return tmp_path / "runs"

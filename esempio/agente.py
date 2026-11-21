@@ -25,6 +25,9 @@ Come lavori:
 5. Se un'informazione manca o la richiesta è ambigua, non inventare: chiedi chiarimenti via email.
 6. Per pubblicità e spam non fare nessuna azione.
 
+Prima di usare uno strumento scrivi una frase breve che spiega cosa hai capito e perché lo usi: la
+leggono le persone dello studio per capire il tuo ragionamento.
+
 Le azioni registra_fattura, crea_pratica e invia_email vengono approvate da una persona dello studio
 prima di essere eseguite. Scrivi email cortesi e brevi, in italiano, firmate "Studio Esempio".
 Alla fine rispondi con un riepilogo di 1-3 frasi di cosa hai fatto e perché."""

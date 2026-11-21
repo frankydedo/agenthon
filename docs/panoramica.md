@@ -1,6 +1,7 @@
 # Cosa c'è in questo branch
 
-> Branch `mauro's-branch`, creato da `main` (commit `6470fea`) il 20 novembre 2026.
+> Aggiornamento: ora c'è anche l'interfaccia web (`web/`, `api/`): vedi [architettura.md](architettura.md) e [frontend.md](frontend.md).
+> Branch `mauro's-branch` (poi `develop`), creato da `main` (commit `6470fea`) il 20 novembre 2026.
 > Questo documento basta da solo per capire cosa contiene il branch e cosa fare dopo.
 > I dettagli sono in [architettura.md](architettura.md), [guida.md](guida.md) e [contratto.md](contratto.md).
 
@@ -94,7 +95,7 @@ controlla in basso cosa è cambiato. Le quattro email da provare:
 
 | Decisione | Perché |
 |---|---|
-| Python + Streamlit, senza FastAPI | è il modo più veloce di avere UI e traccia visibile; FastAPI si aggiunge solo se il brief chiede un'API |
+| Python + Streamlit, poi API FastAPI + frontend React | Streamlit è stato il modo più veloce per partire; il frontend React dà il controllo sull'esperienza (flusso live, approvazione leggibile). Streamlit resta come ripiego |
 | Nessun framework per agenti | il ciclo è di circa 200 righe e lo capiamo tutti; si modifica in fretta sotto pressione |
 | Provider neutro (mock + adapter compatibile OpenAI) | il CLAUDE.md chiede un modello sostituibile; lo sponsor vuole evitare il lock-in; si sviluppa senza costi |
 | Approvazione su ogni azione esterna | è un principio dello sponsor, risponde a "e se sbaglia?" e copre GDPR e AI Act |

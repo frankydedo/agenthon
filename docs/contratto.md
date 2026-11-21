@@ -112,16 +112,24 @@ React (`web/`) parla solo con queste rotte. Avvio: `uvicorn api.main:app --port 
 
 | Metodo e percorso | Cosa fa |
 |---|---|
-| `GET /api/stato` | `{provider, totale, completate, da_approvare[], tempo_medio_ms}` |
-| `GET /api/richieste` | le email, ciascuna con `stato` del run (`null` se mai elaborata) |
-| `GET /api/richieste/{id}` | `{richiesta, run, passi[]}` |
+| `GET /api/stato` | `{provider, totale, disponibili, completate, da_approvare[], tempo_medio_ms}` (`totale` = richieste arrivate) |
+| `GET /api/simulazione` | `{sorgente, totale, disponibili: [{id, da, oggetto}]}`: cosa può ancora "arrivare" |
+| `POST /api/simulazione/genera` | corpo `{id?: str}`; fa arrivare la prossima richiesta (o quella indicata). 409 se già arrivata o finite |
+| `GET /api/richieste` | **solo le richieste arrivate**, dalla più recente, ciascuna con `arrivata_il` e `stato` del run (`null` se mai elaborata) |
+| `GET /api/richieste/{id}` | `{richiesta, run, passi[]}`; 404 se la richiesta non è ancora arrivata |
 | `POST /api/richieste/{id}/elabora` | avvia il run; **bloccante** fino a fine o attesa di approvazione |
 | `POST /api/richieste/{id}/approva` | corpo `{argomenti?: {...}}`; 409 se il run non è in attesa |
 | `POST /api/richieste/{id}/rifiuta` | corpo `{motivo?: str}`; 409 se il run non è in attesa |
+| `GET /api/agente` | `{provider, istruzioni, strumenti: [{nome, descrizione, esterno, parametri[]}]}`: chi è l'agente (per la schermata «Come ragiona») |
+| `GET /api/richieste/{id}/allegati` | `[{nome, testo, errore?}]`: il testo dei PDF allegati, cioè ciò che l'agente legge |
 | `GET /api/richieste/{id}/stream` | SSE: evento `passo` (un evento di traccia, formato sopra) per ogni passo, `reset` quando il run riparte |
 | `GET /api/sistemi` | `{pratiche, fatture, clienti, email_inviate}` (dati simulati) |
-| `POST /api/reset` | azzera run, tracce, gestionale e posta |
+| `POST /api/reset` | azzera casella, run, tracce, gestionale e posta |
 
 `run` = `{id, stato, risposta_finale, errore, in_attesa_di: {id, name, arguments} | null}`; i
-messaggi interni (prompt compreso) **non** escono dal backend. I tipi TypeScript corrispondenti
+messaggi interni della conversazione **non** escono dal backend. Le istruzioni dell'agente sì, ma solo
+via `GET /api/agente`, per trasparenza. I tipi TypeScript corrispondenti
 sono in `web/src/api.ts`: i due file si aggiornano insieme.
+
+Una richiesta **esiste per l'API solo dopo `genera`**: prima, ogni rotta su quell'id risponde 404.
+Lo stato della casella è in `runs/inbox_arrivate.json` (vedi [architettura.md](architettura.md#dove-vive-lo-stato)).

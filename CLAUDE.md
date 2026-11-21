@@ -10,7 +10,10 @@
 - Track: **Agentic AI for business**, sponsor **Ariete Tech Solutions**. Il tema dichiarato:
   agenti autonomi che smistano le richieste in arrivo, estraggono informazioni dai documenti e
   collegano più strumenti, così che il lavoro vada dall'inizio alla fine senza passaggi manuali.
-- Giudizio su: **innovazione, aderenza al brief, fattibilità, esecuzione, pitch finale**.
+- Giudizio (regolamento art. 9, 100 punti): innovatività 25, **esecuzione 25**, fattibilità 20,
+  aderenza al tema 15, presentazione 15. Spareggio: esecuzione, poi innovatività.
+- Prima selezione sul repo **senza** il voto di presentazione; finale: pitch di circa 3 minuti
+  con demo dal vivo. Dettagli in `Vault/wiki/analyses/criteri-e-consegna.md`.
 
 ### Chi è lo sponsor (da arietetech.com)
 - Braccio tecnologico di Ariete Capital Group (Torino): consulenza sugli investimenti,
@@ -26,14 +29,34 @@
 - Prodotti annunciati: AI Advisory (assistente conversazionale per advisor), Stock Selector,
   Alt-Asset Pricer, Real Estate AI, Company Brain (base di conoscenza unica dell'azienda).
 
-## 2. Il brief **[DA COMPILARE]**
+> **Decisioni di prodotto e piano di lavoro: leggi `endof.md` nella root prima di scrivere codice.**
 
-- Problema esatto e utente (chi lo usa, in che ruolo):
-- Dati e documenti forniti (formati, lingua, volume):
-- Strumenti o API da integrare, vincoli tecnici e crediti disponibili:
-- Cosa si consegna (repo, demo dal vivo, video, slide) e quando:
-- Caso d'uso scelto dal team (uno solo):
-- Metrica di successo da mostrare nel pitch (tempo risparmiato, accuratezza, € ...):
+## 2. Il brief (uscito alle 10:28 del 21/11; testo in `Vault/raw/2026-11-21-brief-track1.md`)
+
+Tema: *"Build an AI your team would trust"*: un'AI che lavora in background, **chiede prima di agire**
+e viene difesa dal vivo davanti alla giuria. Vince la soluzione **corretta, che ammette ciò che non
+sa e non agisce mai senza l'approvazione di una persona**, non quella più appariscente.
+
+- **Caso d'uso scelto dal team: Challenge A · Company Brain** ("il collega che sa e parla per primo").
+  Uno strumento che osserva il lavoro di un team (email, chat, task, documenti), tiene una **memoria
+  condivisa curata dalle persone** e dice a ciascuno cosa richiede la sua attenzione prima che lo chieda.
+  *Un chatbot sui documenti non vale.* (L'alternativa scartata era B · Back Office Autopilot.)
+- **Sette controlli della demo**, che la giuria segna sì/no:
+  1. **Parla per primo**: un brief o un alert generato da solo, senza che nessuno chieda.
+  2. **Le persone curano la memoria**: approvare una voce e rifiutarne una, dal vivo; poi una domanda a cui risponde solo la voce approvata.
+  3. **Sa chi chiede**: stessa domanda da una persona della finanza e da una tecnica: a una risponde, all'altra no.
+  4. **Cita**: ogni risposta mostra da dove viene.
+  5. **Ammette le lacune**: su ciò che non è nei dati dice "non lo so".
+  6. **Propone soltanto**: un'azione in attesa di approvazione; nulla accade finché una persona non approva.
+  7. **Si inserisce nella giornata del team**: dove lo incontrerebbe (chat, email del mattino, mock-up stile Slack). Nessuna connessione reale richiesta.
+- **Dati**: li creiamo noi, **sintetici** (nessun dato reale di clienti o persone), oppure partiamo da un dataset open source.
+- **Utenti**: le persone di un team aziendale, con ruoli diversi (almeno finanza e tecnica).
+- **Giudizio**: innovatività, aderenza, **fattibilità oltre il prototipo**, esecuzione tecnica, pitch (pesi in §1).
+- **Pitch**: circa 3 minuti con demo dal vivo, davanti alla giuria, che può fare domande. Il team
+  può essere "attaccato" da giuria e squadre rivali: **la demo deve reggere a domande fuori copione**.
+- **Premio extra**: "Best use of ElevenLabs" (facoltativo, solo se ha senso nel prodotto).
+- **Ancora da chiarire**: orario di consegna; strumenti e crediti dei partner; metrica per il pitch
+  (proposta: i 7 controlli superati, più numeri su pertinenza e "non lo so" corretti).
 
 ## 3. Team e responsabilità **[ruoli decisi; cartelle da confermare dopo il brief]**
 
@@ -85,7 +108,8 @@ Starter kit già pronto: vedi `README.md` e `docs/` (architettura, guida, contra
   Nessun framework per agenti: il ciclo è in `core/agent.py`.
 - Provider LLM: `mock` di default; `openai_compat` per Gemini / Mistral / Ollama (config in `.env`).
   **[DA DECIDERE al kick-off: provider e modello vero, e alternativa di riserva]**
-- Avvio in locale: `streamlit run ui/app.py`
+- Avvio in locale: backend `uvicorn api.main:app --port 8000` + frontend `cd web && npm run dev`
+  (http://localhost:5173); ripiego: `streamlit run ui/app.py`. Architettura: `docs/architettura.md`.
 - Test: `pytest` e, prima di ogni merge, `python scripts/demo_check.py`
 - Struttura: `core/` è riusabile e non si tocca per il brief; il dominio sta in `esempio/` (da sostituire).
 - Interfacce condivise: `docs/contratto.md`.
@@ -104,7 +128,10 @@ Starter kit già pronto: vedi `README.md` e `docs/` (architettura, guida, contra
 2. Prima versione end-to-end, anche grezza.
 3. Rendere tutto reale: modello vero, dati realistici, misura della metrica.
 4. Blocco delle funzionalità: solo bug, stabilità, video di riserva.
-5. Pitch: problema in € o in ore → demo → come funziona → risultati → impatto per i clienti
+5. **Consegna** (orario comunicato all'apertura): repo accessibile alla giuria, README con
+   descrizione, tecnologie e avvio, descrizione ≤ 1.000 caratteri con lo starter kit dichiarato
+   come preesistente, versione finale su `main`. Dopo l'orario non si committa più.
+6. Pitch: problema in € o in ore → demo → come funziona → risultati → impatto per i clienti
    dello sponsor.
 
 ## 9. Base di conoscenza (`Vault/`)

@@ -1,7 +1,7 @@
 ---
 type: overview
-updated: 2026-11-20
-sources: [raw/2026-11-20-luma-evento.md, raw/2026-11-20-arietetech.md]
+updated: 2026-11-21
+sources: [raw/2026-11-20-luma-evento.md, raw/2026-11-20-arietetech.md, raw/regulation.md]
 confidence: media
 tags: [stato]
 ---
@@ -10,11 +10,17 @@ tags: [stato]
 **Il brief non è ancora noto**: esce al kick-off. Fino ad allora il caso d'uso non è scelto.
 
 ## Cosa sappiamo
+- Regolamento noto: criteri con pesi, regole di consegna e pitch di 3 minuti con demo. Vedi
+  [Criteri e consegna](analyses/criteri-e-consegna.md).
 - Evento, track e criteri di giudizio: vedi [AGENTHON](entities/agenthon.md).
 - Sponsor e i suoi principi (persone in controllo, AI dove serve, hosting UE): vedi
   [Ariete Tech Solutions](entities/ariete-tech-solutions.md).
 
 ## Stato del codice
+- Interfaccia nuova: backend FastAPI (`api/`) e frontend React (`web/`) sopra `core/`, collaudati
+  col mock (2026-11-21). Streamlit resta come ripiego.
+- Decisione: la repo di consegna si ricrea allo start dell'evento, così i commit coincidono
+  con gli orari di gara.
 - Sul branch `develop` c'è uno starter kit (vedi `README.md` e `docs/` nel repo):
   - `core/`: ciclo dell'agente, provider LLM sostituibile, tool con approvazione umana, output
     strutturato, traccia dei passi. Pensato per restare valido con qualsiasi brief.

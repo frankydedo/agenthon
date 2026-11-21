@@ -5,7 +5,7 @@ export type Argomenti = Record<string, unknown>
 
 export interface Richiesta {
   id: string; da: string; data: string; oggetto: string; testo: string; allegati: string[]
-  stato: StatoRun | null
+  stato: StatoRun | null; arrivata_il?: string
 }
 export interface ChiamataTool { id: string; name: string; arguments: Argomenti }
 export interface RunPubblico {
@@ -19,8 +19,14 @@ export interface Passo {
 }
 export interface Dettaglio { richiesta: Richiesta; run: RunPubblico | null; passi: Passo[] }
 export interface StatoApp {
-  provider: string; totale: number; completate: number; da_approvare: string[]; tempo_medio_ms: number | null
+  provider: string; totale: number; disponibili: number; completate: number; da_approvare: string[]; tempo_medio_ms: number | null
 }
+export interface Simulazione { sorgente: string; totale: number; disponibili: { id: string; da: string; oggetto: string }[] }
+export interface InfoAgente {
+  provider: string; istruzioni: string
+  strumenti: { nome: string; descrizione: string; esterno: boolean; parametri: string[] }[]
+}
+export interface Allegato { nome: string; testo: string; errore?: string }
 export interface Sistemi {
   pratiche: Record<string, unknown>[]; fatture: Record<string, unknown>[]; clienti: Record<string, unknown>[]
   email_inviate: { inviata_il: string; destinatario: string; oggetto: string; testo: string }[]
@@ -43,6 +49,10 @@ export const api = {
   elabora: (id: string) => chiama<Dettaglio>(`/api/richieste/${id}/elabora`, 'POST'),
   approva: (id: string, argomenti?: Argomenti) => chiama<Dettaglio>(`/api/richieste/${id}/approva`, 'POST', { argomenti: argomenti ?? null }),
   rifiuta: (id: string, motivo: string) => chiama<Dettaglio>(`/api/richieste/${id}/rifiuta`, 'POST', { motivo }),
+  simulazione: () => chiama<Simulazione>('/api/simulazione'),
+  genera: (id?: string) => chiama<Richiesta>('/api/simulazione/genera', 'POST', { id: id ?? null }),
+  agente: () => chiama<InfoAgente>('/api/agente'),
+  allegati: (id: string) => chiama<Allegato[]>(`/api/richieste/${id}/allegati`),
   sistemi: () => chiama<Sistemi>('/api/sistemi'),
   reset: () => chiama<{ ok: boolean }>('/api/reset', 'POST'),
 }

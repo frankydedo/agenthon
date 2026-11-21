@@ -9,18 +9,104 @@ usare uno strumento (un *tool*: cercare un cliente, leggere un PDF, inviare un'e
 esegue il tool e gli rimanda il risultato. Le azioni che toccano il mondo esterno si fermano e
 aspettano che una persona le approvi.
 
-Il kit è diviso in due:
+## Visione d'insieme
+
+```mermaid
+flowchart LR
+    subgraph Browser
+        W["Frontend React<br/><b>web/</b>"]
+    end
+    subgraph Server["Server locale (Python)"]
+        API["API HTTP + SSE<br/><b>api/main.py</b>"]
+        CORE["Nucleo dell'agente<br/><b>core/</b>"]
+        DOM["Dominio (tool, connettori, dati)<br/><b>esempio/</b>"]
+    end
+    LLM[("Modello LLM<br/>mock · Ollama · cloud")]
+    FS[("Stato su disco<br/><b>runs/</b>")]
+
+    W -- "JSON (azioni) + SSE (passi in diretta)" --> API
+    API --> CORE
+    CORE --> DOM
+    CORE -- "chat(messaggi, tool)" --> LLM
+    CORE -- "run + traccia" --> FS
+    DOM -- "gestionale + posta" --> FS
+    API -. "legge la traccia" .-> FS
+```
+
+Il sistema è diviso in **quattro livelli**, ciascuno con una sola responsabilità:
+
+| Livello | Cartella | Responsabilità | Cambia con il brief? |
+|---|---|---|---|
+| Interfaccia | `web/` | Mostrare lo stato e raccogliere le decisioni della persona. Nessuna logica dell'agente. | I testi e le descrizioni delle azioni (`azioni.ts`) sì, il resto no |
+| API | `api/` | Tradurre HTTP in chiamate a `core/`. Espone solo ciò che serve alla UI (niente prompt, niente messaggi interni). | Poco: l'elenco della simulazione |
+| Nucleo | `core/` | Ciclo dell'agente, tool, approvazioni, traccia, provider LLM. | **No** |
+| Dominio | `esempio/` | Prompt, tool, connettori ai sistemi del cliente, dati di prova. | **Sì: si sostituisce** |
+
+`ui/app.py` (Streamlit) è la prima interfaccia: resta come ripiego finché quella web non è collaudata.
+
+In pratica il codice Python si divide in due:
 
 - **`core/`**: la struttura che serve a qualunque brief (ciclo, tool, approvazioni, traccia, provider).
   Non contiene niente di specifico dello studio commercialista.
 - **`esempio/`**: un dominio di prova costruito sopra `core/`. Al kick-off si sostituisce con il
   dominio del brief, mentre `core/` resta com'è.
 
-## Il flusso, su un esempio vero (email-001)
+### Dove vive lo stato
+
+Non c'è un database dell'agente: tutto lo stato sta in file dentro `runs/` (ignorata da git).
+
+| File | Contenuto | Chi lo scrive |
+|---|---|---|
+| `runs/inbox_arrivate.json` | quali richieste sono "arrivate" nella casella e quando | `api/` (pulsante «Genera richiesta») |
+| `runs/<id>.run.json` | stato del run: conversazione, azione in attesa, risposta finale | `core/agent.py` |
+| `runs/<id>.trace.jsonl` | un evento per riga: ogni passo dell'agente | `core/trace.py` |
+| `runs/gestionale.db` | gestionale SQLite (clienti, pratiche, fatture) | `esempio/connettori.py` |
+| `runs/posta_inviata.jsonl` | email "inviate" (finte: nessuna spedizione reale) | `esempio/connettori.py` |
+
+Conseguenza utile: si può riavviare il backend, o ricaricare la pagina, senza perdere niente.
+Il pulsante **Reset** cancella tutto questo e riparte da zero.
+
+## Il ciclo di vita di una richiesta
+
+```mermaid
+stateDiagram-v2
+    [*] --> Arrivata: «Genera richiesta»
+    Arrivata --> in_corso: «Avvia l'agente»
+    in_corso --> in_attesa: l'agente chiede un'azione esterna
+    in_attesa --> in_corso: Approva / Rifiuta
+    in_corso --> completato: il modello risponde senza tool
+    in_corso --> errore: errore del modello o limite di passi
+    completato --> in_corso: «Rielabora»
+    errore --> in_corso: «Rielabora»
+```
+
+## Il flusso del sistema, dall'inizio alla fine
+
+1. **Arrivo.** La persona preme «Genera richiesta»: il frontend chiama `POST /api/simulazione/genera`
+   e l'API aggiunge una email a `inbox_arrivate.json`. (In produzione questo passo sarebbe il
+   server di posta dello studio; il resto del flusso non cambierebbe.)
+2. **Avvio.** «Avvia l'agente» chiama `POST /api/richieste/{id}/elabora`. L'API passa il testo
+   dell'email a `Agente.avvia()`. La chiamata resta aperta finché l'agente finisce o si ferma.
+3. **Lavoro dell'agente.** Il ciclo (sezione 2 sotto) chiama il modello, esegue i tool di lettura
+   e scrive ogni passo in `trace.jsonl`.
+4. **Visibilità in diretta.** Nel frattempo il browser ha uno stream aperto
+   (`GET /api/richieste/{id}/stream`, Server-Sent Events). L'API controlla il file di traccia ogni
+   0,3 secondi e invia ogni nuovo evento: i passi compaiono uno alla volta, il più recente in alto.
+5. **Pausa per l'approvazione.** Davanti a un'azione esterna il run diventa `in_attesa` e la
+   chiamata del punto 2 termina. L'interfaccia mostra una scheda in italiano, con l'anteprima di
+   ciò che verrà fatto.
+6. **Decisione.** «Approva» (anche con dati corretti) o «Rifiuta» arrivano a `core/` e il ciclo riparte
+   dal punto 3 con l'esito della decisione.
+7. **Fine.** Il modello risponde senza chiedere tool: il run è `completato`, la risposta finale è
+   mostrata e le tabelle dei sistemi dello studio riflettono ciò che è cambiato.
+
+## Il flusso su un esempio vero (email-001)
+
+Le stesse operazioni, viste tra i componenti. «Frontend + API» è l'insieme di `web/` e `api/`.
 
 ```mermaid
 sequenceDiagram
-    participant UI as UI (Streamlit)
+    participant UI as Frontend + API
     participant A as Agente (core/agent.py)
     participant M as Modello (provider)
     participant T as Tool (esempio/agente.py)
@@ -145,10 +231,14 @@ uscita (scrive su `runs/posta_inviata.jsonl`, non spedisce niente). Hanno la for
 quelli veri: per collegare Gmail si riscrive il corpo di `invia_email`, senza toccare agente e tool.
 Tutti i dati sono sintetici (email `@example.it`, partite IVA con codice ufficio `000`, non assegnato).
 
-### 8. UI e verifica end-to-end: `ui/app.py`, `scripts/demo_check.py`
+### 8. API, interfaccia e verifica end-to-end: `api/`, `web/`, `scripts/demo_check.py`
 
-La UI ha tre colonne (richieste, passi, approvazione) e sotto lo stato dei sistemi simulati.
-Nella barra laterale ci sono il provider in uso, le metriche e il reset della demo.
+- **`api/main.py`** è un sottile strato FastAPI sopra `core/`. Contiene solo la simulazione
+  della casella email e la traduzione HTTP: nessuna logica dell'agente. Le rotte sono in
+  [contratto.md](contratto.md#api-http-apimainpy-e-interfaccia-web-web).
+- **`web/`** è l'interfaccia React, con due schermate (operativa e «Come ragiona l'agente»): come
+  funzionano è in [frontend.md](frontend.md).
+- **`ui/app.py`** (Streamlit) è la prima versione della UI, mantenuta come ripiego.
 
 `demo_check.py` fa girare le quattro email con risposte registrate, approva tutto e controlla
 stato, azioni, righe nel gestionale, email inviate e traccia. Usa una cartella temporanea, quindi
@@ -162,7 +252,9 @@ non tocca lo stato della UI.
 - **Niente database per lo stato dei run**: file JSON in `runs/`. Basta per una demo con un utente.
 - **Un tool esterno alla volta**: se il modello chiede più azioni insieme, vengono approvate una
   dopo l'altra.
-- **Niente API web (FastAPI)**: la UI chiama l'agente direttamente. Si aggiunge solo se il brief
-  richiede un webhook o un frontend separato.
+- **Un'elaborazione alla volta per richiesta**: `elabora` è una chiamata bloccante (la durata è
+  quella del modello). I passi si vedono in diretta grazie allo stream, ma il backend non ha code
+  né lavoratori in background. Per una demo basta; per più utenti contemporanei no.
+- **Nessuna autenticazione** sull'API: pensata per girare in locale durante la demo.
 - **L'adapter del modello vero non è ancora stato provato con una chiave**: è testato con un
   server HTTP finto. Va provato appena avete una chiave (vedi la guida).

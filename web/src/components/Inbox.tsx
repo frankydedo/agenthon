@@ -7,6 +7,8 @@ import { STATO } from '@/passi'
 export function Inbox({ richieste, selezionata, onSeleziona }: {
   richieste: Richiesta[]; selezionata: string | null; onSeleziona: (id: string) => void
 }) {
+  if (!richieste.length)
+    return <p className="rounded-xl border border-line bg-surface p-4 text-center text-sm text-muted">La casella è vuota. Genera una richiesta per iniziare.</p>
   return (
     <ul className="flex flex-col gap-2">
       {richieste.map((r, i) => {
