@@ -26,14 +26,33 @@
 - Prodotti annunciati: AI Advisory (assistente conversazionale per advisor), Stock Selector,
   Alt-Asset Pricer, Real Estate AI, Company Brain (base di conoscenza unica dell'azienda).
 
-## 2. Il brief **[DA COMPILARE]**
+## 2. Il brief **[in parte compilato dal regolamento; il resto al kick-off]**
 
-- Problema esatto e utente (chi lo usa, in che ruolo):
-- Dati e documenti forniti (formati, lingua, volume):
-- Strumenti o API da integrare, vincoli tecnici e crediti disponibili:
-- Cosa si consegna (repo, demo dal vivo, video, slide) e quando:
-- Caso d'uso scelto dal team (uno solo):
-- Metrica di successo da mostrare nel pitch (tempo risparmiato, accuratezza, € ...):
+Fonte: regolamento ufficiale del 20/11/2026 (`Vault/raw/regulation.md`, sintesi in
+`Vault/wiki/concepts/consegna-e-valutazione.md`).
+
+- Problema esatto e utente (chi lo usa, in che ruolo): **[DA COMPILARE]** (il brief si comunica
+  all'apertura dell'Evento, art. 7.2). Il tema del track è un prototipo AI che svolge in autonomia
+  processi aziendali: gestione di richieste, elaborazione di documenti, coordinamento di più
+  applicativi (art. 5.1).
+- Dati e documenti forniti (formati, lingua, volume): **[DA COMPILARE]**
+- Strumenti o API da integrare, vincoli tecnici e crediti disponibili: **[DA COMPILARE]**. Il
+  regolamento ammette librerie, framework, API e servizi AI di terzi, nel rispetto delle licenze
+  (art. 7.1). I partner possono fornire crediti gratuiti (art. 7.7), e ElevenLabs ha un premio
+  speciale per il miglior uso dei suoi strumenti (art. 10.7).
+- Cosa si consegna e quando (art. 7.3-7.5), tramite `agenthon-portal.gdgtorino.it`:
+  - link al **repo**, accessibile alla giuria, con un file su progetto, tecnologie e istruzioni di avvio;
+  - **descrizione di massimo 1.000 caratteri**, con i componenti preesistenti usati (lo starter kit
+    va dichiarato);
+  - facoltativo: link a una cartella Google Drive con le slide;
+  - i link devono aprirsi anche da un account esterno al team;
+  - entro l'orario comunicato durante l'Evento (**[DA COMPILARE]**). Conta l'**ultimo commit** a
+    quell'ora, e la demo deve girare su quella versione;
+  - finalisti (8-12) scelti senza pitch; in finale **pitch di ~3 minuti con demo dal vivo**.
+- Punteggio (art. 9.1, su 100): innovatività 25, esecuzione 25, fattibilità 20, aderenza 15,
+  presentazione 15. A parità vince chi ha più punti in esecuzione, poi in innovatività.
+- Caso d'uso scelto dal team (uno solo): **[DA COMPILARE]**
+- Metrica di successo da mostrare nel pitch (tempo risparmiato, accuratezza, € ...): **[DA COMPILARE]**
 
 ## 3. Team e responsabilità **[ruoli decisi; cartelle da confermare dopo il brief]**
 
