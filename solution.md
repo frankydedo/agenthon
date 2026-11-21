@@ -176,33 +176,39 @@ agentico con tool serve per le domande e per approfondire un'incongruenza.
 
 ---
 
-## 6. Contratti condivisi [PROPOSTO, da fissare insieme in Fase 0]
+## 6. Contratti condivisi [DECISO: `backend/modelli.py` scritto il 21/11 alle 12:55]
 
-Vivono in `backend/modelli.py` (Pydantic) e `backend/schema.sql`. **Si cambiano solo dopo averne
-parlato**; chi li cambia aggiorna anche i dati finti.
+Il contratto è **`backend/modelli.py`** (Pydantic v2): leggilo prima di scrivere codice che tocca i
+dati. **Si cambia solo dopo averne parlato**; chi lo cambia aggiorna anche i dati finti in `dati/`.
+Da fare ancora: `backend/schema.sql` (tabelle corrispondenti) e `dati/` (azienda e riunioni).
 
-**Riunione**
-```json
-{"id": "riu-001", "progetto": "prj-01", "data": "2026-11-10", "partecipanti": ["p-01", "p-03"],
- "aree_predefinite": ["sviluppo"],
- "segmenti": [{"id": "riu-001#s12", "chi": "p-03", "inizio": 872.4, "fine": 880.1, "testo": "..."}]}
-```
-`aree_predefinite`: aree di competenza suggerite per ciò che emerge dalla riunione (es. una
-riunione sui costi → `budget`). Il modello può proporne altre per singolo fatto; il manager conferma.
-
-**Output dell'estrazione**
-- `task[]`: descrizione, assegnatario_detto, assegnatario_id (o null), scadenza, **aree**, segmento_id, sicurezza
-- `fatti[]`: soggetto, attributo, valore, **aree**, segmento_id
-- `punti_oscuri[]`: cosa, perché, segmento_id
-- `sconosciuti[]`: nome, tipo (persona | contesto), segmento_id
-
-**Tabelle**: progetti, persone (alias, ruolo, reparto, **competenze**), riunioni, segmenti, fatti, task,
-dipendenze, proposte (in_attesa | approvata | rifiutata), todo_giornaliere, avvisi, domande,
-eventi. Ogni fatto/task/proposta punta al **segmento** da cui nasce (da lì le citazioni).
+Scelte fissate:
+- **Id stringa leggibili** con prefisso (`p-01`, `prj-01`, `riu-001`, `riu-001#s012`, `task-001`,
+  `fat-001`, `prop-001`, `avv-001`); **campi in italiano**.
+- **Manager per progetto** (`Progetto.manager_id`): approva le proposte e vede tutto il progetto.
+- **Segmento** = turno di parola, l'unità che si cita. Da audio: ElevenLabs Speech-to-Text restituisce
+  `words` (`text`, `type` word/spacing/audio_event, `start`/`end` in secondi, `speaker_id` tipo
+  `speaker_0`; serve `diarize=true`); il codice raggruppa le parole consecutive dello stesso speaker.
+  Da minuta: un segmento per intervento, **orari vuoti**. `speaker` (grezzo) → `persona_id` (abbinato dal codice).
+- **Output del modello** = `EstrazioneRiunione`: `task`, `aggiornamenti` (di task esistenti),
+  `fatti`, `punti_oscuri`, `sconosciuti`. Il modello cita solo **id di segmenti/task ricevuti**;
+  non risolve persone e non scrive citazioni.
+- **Sicurezza** alta / media / bassa; `bassa` genera un punto oscuro.
+- **Fatti**: attributo da **lista chiusa** (scadenza, responsabile, budget, costo, stato, fornitore,
+  decisione, requisito, rischio, altro) per trovare le incongruenze nel codice.
+- **Proposte** (si approvano/rifiutano, voce per voce): nuovo_task, aggiorna_task, chiudi_task,
+  nuovo_fatto. **Avvisi** (si vedono e si risolvono): incongruenza, punto_oscuro, sconosciuto,
+  dipendenza_a_rischio, evento_esterno, brief.
+- **Task**: 5 stati (da_fare, in_corso, bloccato, fatto, annullato); `bloccato` calcolato dalle dipendenze.
+- **To-do del giorno**: **solo task del progetto**, niente voci personali.
+- **Risposte**: esito `risposta` | `non_lo_so` | `non_autorizzato`, con citazioni obbligatorie se `risposta`.
+- **Permessi**: funzione `puo_vedere()` in `modelli.py`, unica per tutti (membro del progetto;
+  manager vede tutto; `generale` a tutti; altrimenti basta un'area in comune).
 
 **API** (prima versione): `POST /riunioni` · `GET /proposte` · `POST /proposte/{id}/approva` ·
-`POST /proposte/{id}/rifiuta` · `GET /progetti/{id}/todo` · `GET /persone/{id}/todo-oggi` ·
-`POST /todo-oggi/accetta` · `GET /avvisi` (SSE) · `POST /domande` · `POST /eventi/simula` · `GET /registro`.
+`POST /proposte/{id}/rifiuta` · `GET /avvisi` (SSE) · `POST /avvisi/{id}/risolvi` ·
+`GET /progetti/{id}/todo` · `GET /persone/{id}/todo-oggi` · `POST /todo-oggi/accetta` ·
+`POST /domande` · `POST /eventi/simula` · `GET /registro`.
 
 ---
 
