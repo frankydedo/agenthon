@@ -56,6 +56,13 @@ sa e non agisce mai senza l'approvazione di una persona**, non quella più appar
   può essere "attaccato" da giuria e squadre rivali: **la demo deve reggere a domande fuori copione**.
 - **Premio extra**: "Best use of ElevenLabs" (facoltativo, solo se ha senso nel prodotto).
 - **Consegna: ore 17:00** (ultimo commit entro le 16:50).
+- **Consegna** (regolamento art. 7.3-7.5, portale `agenthon-portal.gdgtorino.it`):
+  - link al **repo**, accessibile alla giuria anche da un account esterno, con un file su progetto,
+    tecnologie e istruzioni di avvio;
+  - **descrizione di massimo 1.000 caratteri**, con i componenti preesistenti (lo starter kit va dichiarato);
+  - facoltativo: cartella Google Drive con le slide;
+  - conta l'**ultimo commit** all'orario di consegna, e la demo deve girare su quella versione;
+  - finalisti (8-12) scelti senza pitch. Sintesi: `Vault/wiki/concepts/consegna-e-valutazione.md`.
 - **Ancora da chiarire**: strumenti e crediti dei partner; metrica per il pitch
   (proposta: i 7 controlli superati, più numeri su pertinenza e "non lo so" corretti).
 

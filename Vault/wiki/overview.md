@@ -1,18 +1,25 @@
 ---
 type: overview
 updated: 2026-11-21
-sources: [raw/2026-11-20-luma-evento.md, raw/2026-11-20-arietetech.md, raw/regulation.md]
+sources: [raw/2026-11-20-luma-evento.md, raw/2026-11-20-arietetech.md, raw/regulation.md, raw/2026-11-21-brief.md]
 confidence: media
 tags: [stato]
 ---
 # Overview
 
-**Il brief non è ancora noto**: esce al kick-off. Fino ad allora il caso d'uso non è scelto.
+**Il brief è uscito** (2026-11-21): "Build an AI your team would trust". Si sceglie una di due
+challenge; la A è **Company Brain**, con sette controlli sì/no da superare nella demo. La
+challenge B non è ancora nel testo ricevuto. **La challenge non è ancora scelta.** Vedi
+[Brief del track](concepts/brief-del-track.md).
 
 ## Cosa sappiamo
-- Regolamento noto: criteri con pesi, regole di consegna e pitch di 3 minuti con demo. Vedi
-  [Criteri e consegna](analyses/criteri-e-consegna.md).
-- Evento, track e criteri di giudizio: vedi [AGENTHON](entities/agenthon.md).
+- Brief, challenge A e i sette controlli della giuria: vedi
+  [Brief del track](concepts/brief-del-track.md).
+- Evento, track, premi e regole: vedi [AGENTHON](entities/agenthon.md).
+- Cosa si consegna (repo + README + descrizione da 1.000 caratteri), scadenza (conta l'ultimo
+  commit), pesi dei criteri e pitch di ~3 minuti: vedi
+  [Consegna e valutazione](concepts/consegna-e-valutazione.md).
+- Analisi di dettaglio su punteggi, fasi e checklist: [Criteri e consegna](analyses/criteri-e-consegna.md).
 - Sponsor e i suoi principi (persone in controllo, AI dove serve, hosting UE): vedi
   [Ariete Tech Solutions](entities/ariete-tech-solutions.md).
 
@@ -33,6 +40,11 @@ tags: [stato]
   Vedi [LLM locale](analyses/llm-locale.md).
 
 ## Domande aperte
+- Testo della challenge B e scelta della challenge (decisione del team).
+- Come si combinano i sette controlli sì/no con i 100 punti del regolamento; come funziona
+  l'attacco delle squadre rivali.
+- Lo starter kit scritto prima dell'Evento è ammesso? Va comunque dichiarato come componente
+  preesistente (regolamento art. 7.1 e 7.3).
 - Provider cloud di riserva per la demo dal vivo (il modello locale è deciso, vedi sopra).
 - Come misurare la metrica del pitch (accuratezza dello smistamento, tempo risparmiato...).
 - Tutto ciò che è in "Da verificare" nelle pagine delle entità.

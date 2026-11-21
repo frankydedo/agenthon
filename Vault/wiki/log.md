@@ -26,6 +26,24 @@
 - Il token di LM Studio resta fuori dalla wiki (regola di `CLAUDE.md` §5 sui segreti).
 - Aggiornata `analyses/llm-locale.md`.
 
+## [2026-11-21 10:08] ingest | Regolamento ufficiale
+- Fonte: `raw/regulation.pdf` (versione del 20/11/2026); aggiunta la trascrizione `raw/regulation.md`.
+- Creata: `concepts/consegna-e-valutazione.md`. Aggiornate: `entities/agenthon.md`, `overview.md`, `index.md`.
+- Nuovi fatti: pesi dei criteri, consegna via portale (repo + README + 1.000 caratteri), ultimo
+  commit registrato alla scadenza, finalisti scelti senza pitch, pitch di ~3 minuti, premi 1.250/500 €.
+- Nessuna contraddizione con la pagina Luma; risolti diversi punti "Da verificare".
+- Aperto: starter kit preesistente (art. 7.1/7.3), orario di consegna, branch letto dal portale.
+
+## [2026-11-21 10:58] ingest | Brief del track
+- Fonte: `raw/2026-11-21-brief.md` (testo incollato dal team, formattato in markdown).
+- Creata: `concepts/brief-del-track.md`. Aggiornate: `overview.md`, `index.md`,
+  `entities/agenthon.md`, `entities/ariete-tech-solutions.md`, `concepts/consegna-e-valutazione.md`.
+- Nuovi fatti: due challenge, una giuria e una classifica; challenge A "Company Brain" con sette
+  controlli sì/no; demo attaccata anche dalle squadre rivali.
+- Possibili contraddizioni con il regolamento: "una giuria, una classifica" (art. 8.1, 10.1) e
+  attacco delle squadre rivali (art. 7.4); annotate in "Da verificare".
+- Aperto: testo della challenge B, scelta della challenge, peso dei controlli sui 100 punti.
+
 ## [2026-11-21 10:30] ingest | Regolamento dell'hackathon
 - Fonte: `raw/regulation.pdf` (+ trascrizione `.md`), versione del 20 novembre.
 - Creata `analyses/criteri-e-consegna.md`; aggiornati `entities/agenthon.md`, `overview.md`, `index.md`.
@@ -83,4 +101,11 @@
 - Orario di consegna: **17:00** (ultimo commit entro le 16:50). Tappe ricalcolate in `solution.md` §8.
 - Permessi: basta **una** delle aree dell'informazione per vederla.
 - `endof.md` rinominato in `solution.md` dal team.
+
+## [2026-11-21 12:35] lint | Merge di due ingest paralleli
+- Brief e regolamento erano stati ingeriti in parallelo da due membri del team.
+- Fonti duplicate in `raw/` (immutabili, si tengono entrambe): `2026-11-21-brief.md` e
+  `2026-11-21-brief-track1.md` (stesso testo); `regulation.md` tenuta nella versione del collega.
+- Pagine sovrapposte: `concepts/consegna-e-valutazione.md` (principale) e `analyses/criteri-e-consegna.md`
+  (checklist); `concepts/brief-del-track.md` è la pagina del brief. Da accorpare in un lint successivo.
 
