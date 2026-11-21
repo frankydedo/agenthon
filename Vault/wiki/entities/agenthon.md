@@ -1,7 +1,7 @@
 ---
 type: entity
 updated: 2026-11-21
-sources: [raw/2026-11-20-luma-evento.md, raw/regulation.pdf, raw/regulation.md]
+sources: [raw/2026-11-20-luma-evento.md, raw/regulation.pdf, raw/regulation.md, raw/2026-11-21-brief.md]
 confidence: alta
 tags: [evento, hackathon, regole]
 ---
@@ -16,7 +16,8 @@ Categoria 1 "Agentic AI for business", sponsor Ariete Tech Solutions.
   processi aziendali, ad esempio gestione di richieste, elaborazione di documenti,
   coordinamento di più applicativi ([fonte](../../raw/regulation.md)). Coerente con la pagina
   Luma ([fonte](../../raw/2026-11-20-luma-evento.md)).
-- Il brief della categoria si comunica all'apertura dell'Evento (art. 7.2).
+- Il brief della categoria si comunica all'apertura dell'Evento (art. 7.2). Uscito il
+  2026-11-21: vedi [Brief del track](../concepts/brief-del-track.md).
 - L'altro track è "GenAI for marketing" (sponsor Demetra S.r.l.): non ci riguarda.
 
 ## Come si vince
@@ -50,6 +51,7 @@ Categoria 1 "Agentic AI for business", sponsor Ariete Tech Solutions.
   [Consegna e valutazione](../concepts/consegna-e-valutazione.md#da-verificare).
 
 ## Collegamenti
+- [Brief del track](../concepts/brief-del-track.md)
 - [Consegna e valutazione](../concepts/consegna-e-valutazione.md)
 - [Ariete Tech Solutions](ariete-tech-solutions.md)
 - [Overview](../overview.md)

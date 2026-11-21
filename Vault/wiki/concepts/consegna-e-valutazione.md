@@ -63,6 +63,9 @@ ufficiale (versione del 20/11/2026, [fonte](../../raw/regulation.md)), salvo le 
 - 3 minuti con demo dal vivo sono pochissimi: script del pitch cronometrato e video di riserva.
 
 ## Da verificare
+- Il brief ([fonte](../../raw/2026-11-21-brief.md)) aggiunge sette controlli sì/no per la
+  challenge A e un attacco delle squadre rivali: non è chiaro come si combinino con i criteri
+  dell'art. 9.1. Vedi [Brief del track](brief-del-track.md).
 - Lo starter kit (`core/`) è stato scritto **prima** dell'Evento, mentre l'art. 7.1 chiede che il
   progetto sia sviluppato durante l'Evento e l'art. 7.3 c) chiede di dichiarare i componenti
   preesistenti. *(deduzione)* Va dichiarato esplicitamente nella descrizione; chiedere agli
@@ -70,6 +73,7 @@ ufficiale (versione del 20/11/2026, [fonte](../../raw/regulation.md)), salvo le 
 - Orario esatto di consegna e quale branch registra il portale.
 
 ## Collegamenti
+- [Brief del track](brief-del-track.md)
 - [AGENTHON](../entities/agenthon.md)
 - [Ariete Tech Solutions](../entities/ariete-tech-solutions.md)
 - [Overview](../overview.md)

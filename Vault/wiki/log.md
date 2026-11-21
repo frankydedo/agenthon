@@ -33,3 +33,13 @@
   commit registrato alla scadenza, finalisti scelti senza pitch, pitch di ~3 minuti, premi 1.250/500 €.
 - Nessuna contraddizione con la pagina Luma; risolti diversi punti "Da verificare".
 - Aperto: starter kit preesistente (art. 7.1/7.3), orario di consegna, branch letto dal portale.
+
+## [2026-11-21 10:58] ingest | Brief del track
+- Fonte: `raw/2026-11-21-brief.md` (testo incollato dal team, formattato in markdown).
+- Creata: `concepts/brief-del-track.md`. Aggiornate: `overview.md`, `index.md`,
+  `entities/agenthon.md`, `entities/ariete-tech-solutions.md`, `concepts/consegna-e-valutazione.md`.
+- Nuovi fatti: due challenge, una giuria e una classifica; challenge A "Company Brain" con sette
+  controlli sì/no; demo attaccata anche dalle squadre rivali.
+- Possibili contraddizioni con il regolamento: "una giuria, una classifica" (art. 8.1, 10.1) e
+  attacco delle squadre rivali (art. 7.4); annotate in "Da verificare".
+- Aperto: testo della challenge B, scelta della challenge, peso dei controlli sui 100 punti.
